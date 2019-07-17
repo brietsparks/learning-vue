@@ -23,7 +23,7 @@
   import { actionTypes as actions } from '../store/todos';
 
   export default {
-    name: 'todo-list',
+    name: 'todos-list',
     components: {
       TodoNewItem,
       TodoItem
