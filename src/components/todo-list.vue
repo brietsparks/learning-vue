@@ -8,6 +8,8 @@
       <div>Loading...</div>
     </template>
     <template v-else>
+      <todo-new-item/>
+
       <div v-for="id in ids">
         <todo-item :id="id"></todo-item>
       </div>
@@ -17,11 +19,13 @@
 
 <script>
   import TodoItem from './todo-item';
+  import TodoNewItem from './todo-new-item';
   import { actionTypes as actions } from '../store/todos';
 
   export default {
     name: 'todo-list',
     components: {
+      TodoNewItem,
       TodoItem
     },
     computed: {

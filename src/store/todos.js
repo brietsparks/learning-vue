@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { fetchTodos } from '../service';
 
 export const initialState = {
@@ -34,6 +35,15 @@ const actions = {
 
     context.commit(mutationTypes.SET_IS_FETCHING_TODO, false);
   },
+  [actionTypes.CHANGE_TODO](context, { id, ...changes }) {
+    context.commit(mutationTypes.CHANGE_TODO, { id, changes });
+  },
+  [actionTypes.REMOVE_TODO](context, id) {
+    context.commit(mutationTypes.REMOVE_TODO, id);
+  },
+  [actionTypes.ADD_TODO](context, { id, title }) {
+    context.commit(mutationTypes.ADD_TODO, { id, title });
+  }
 };
 
 const mutationTypes = {
@@ -56,6 +66,26 @@ const mutations = {
   },
   [mutationTypes.SET_ERROR_TODOS](state, message) {
     state.network.error = message;
+  },
+  [mutationTypes.CHANGE_TODO](state, { id, changes }) {
+    if (!state.resources[id]) {
+      return;
+    }
+
+    for (let field in changes) {
+      Vue.set(state.resources[id], field, changes[field]);
+    }
+  },
+  [mutationTypes.REMOVE_TODO](state, id) {
+    if (state.resources[id]) {
+      Vue.delete(state.resources, id);
+    }
+
+    state.ids.splice(state.ids.indexOf(id), 1);
+  },
+  [mutationTypes.ADD_TODO](state, { id, title }) {
+    state.resources[id] = { title };
+    state.ids.push(id);
   }
 };
 
