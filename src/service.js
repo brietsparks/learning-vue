@@ -2,26 +2,23 @@ const localStorageKey = 'todos';
 
 const firstTimeData = {
   resources: {
-    't1': { title: 'abc' },
-    't2': { title: 'xyz' }
+    't1': { title: 'Add a todo by typing into the input bar above and pressing enter' },
+    't2': { title: 'Remove a todo by clicking its "×" icon to the right' },
+    't3': { title: 'Save or clear your list using the buttons at the top right' }
   },
-  ids: ['t1', 't2']
+  ids: ['t1', 't2', 't3']
 };
 
 export const fetchTodos = () => {
-  return new Promise(res => {
-    setTimeout(() => {
-      const str = localStorage.getItem(localStorageKey);
+  const str = localStorage.getItem(localStorageKey);
 
-      if (!str) {
-        res(firstTimeData)
-      }
+  if (!str) {
+    return firstTimeData
+  }
 
-      const { resources, ids } = JSON.parse(str);
+  const { resources, ids } = JSON.parse(str);
 
-      res({ resources, ids });
-    }, 800)
-  });
+  return { resources, ids };
 };
 
 export const saveTodos = ({ resources, ids }) => {

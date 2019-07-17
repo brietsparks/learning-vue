@@ -1,11 +1,14 @@
 <template>
   <div>
-    <input
+    <v-text-field
       :value="todo.title"
       @change="editTitle"
       placeholder="Title"
-    />
-    <button @click="remove">Remove</button>
+    >
+      <template slot="append">
+        <v-icon @click="remove">clear</v-icon>
+      </template>
+    </v-text-field>
   </div>
 </template>
 

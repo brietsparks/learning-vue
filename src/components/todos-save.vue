@@ -1,7 +1,19 @@
 <template>
   <div>
-    <button @click="save">Save</button>
-    <div v-if="isSaving">...saving</div>
+    <v-btn
+      :loading="isSaving"
+      @click="save"
+      color="info"
+    >
+      Save
+      <template>
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          size="sm"
+        ></v-progress-circular>
+      </template>
+    </v-btn>
   </div>
 </template>
 

@@ -1,11 +1,16 @@
 <template>
   <div>
-    <input
+    <v-text-field
+      label="Title"
       v-model="title"
       ref="title"
       @keypress="handleEnter"
-    />
-    <button @click="add">Add</button>
+    >
+      <template slot="append">
+        <v-icon @click="add" color="info">add</v-icon>
+      </template>
+    </v-text-field>
+<!--    <v-btn @click="add" color="info">Add</v-btn>-->
   </div>
 </template>
 

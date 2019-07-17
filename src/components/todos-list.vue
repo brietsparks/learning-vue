@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container grid-list-lg>
     <template v-if="error">
       <div>Oops, an error occurred!</div>
     </template>
@@ -10,21 +10,16 @@
     <template v-else>
       <todo-new-item/>
 
-      <todos-save />
-
       <div v-for="id in ids" :key="id">
         <todo-item :id="id"></todo-item>
       </div>
-
-      <button @click="clear" v-if="!isEmpty">Remove All</button>
     </template>
-  </div>
+  </v-container>
 </template>
 
 <script>
   import TodoItem from './todo-item';
   import TodoNewItem from './todo-new-item';
-  import TodosSave from './todos-save';
   import { actionTypes as actions } from '../store/todos';
 
   export default {
@@ -32,12 +27,6 @@
     components: {
       TodoNewItem,
       TodoItem,
-      TodosSave
-    },
-    methods: {
-      clear() {
-        this.$store.dispatch(actions.CLEAR_TODOS)
-      }
     },
     computed: {
       ids() {
@@ -48,10 +37,7 @@
       },
       error() {
         return this.$store.getters.todosError;
-      },
-      isEmpty() {
-        return this.ids.length < 1;
-      },
+      }
     },
     created: function() {
       this.$store.dispatch(actions.FETCH_TODOS);
