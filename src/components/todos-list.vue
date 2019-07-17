@@ -12,8 +12,8 @@
 
       <todos-save />
 
-      <div v-for="id in ids">
-        <todo-item :id="id" :key="id"></todo-item>
+      <div v-for="id in ids" :key="id">
+        <todo-item :id="id"></todo-item>
       </div>
 
       <button @click="clear" v-if="!isEmpty">Remove All</button>
