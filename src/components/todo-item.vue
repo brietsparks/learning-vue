@@ -1,7 +1,5 @@
 <template>
   <div>
-    <p>Id: {{ id }}</p>
-
     <input
       :value="todo.title"
       @change="editTitle"
