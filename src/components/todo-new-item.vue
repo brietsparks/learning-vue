@@ -27,9 +27,15 @@
     },
     methods: {
       add: function() {
+        const title = this.title.trim();
+
+        if (title === '') {
+          return;
+        }
+
         this.$store.dispatch(actions.ADD_TODO, {
           id: randomString(),
-          title: this.title
+          title
         });
 
         Object.assign(this.$data, this.$options.data());
